@@ -7,7 +7,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/../j_go"));
+app.use(express.static(__dirname + "/j_mmw"));
 app.post("/django_go/go_ajax/", http_input_module.post);
 app.get("/django_go/go_ajax/", http_input_module.get);
 app.put("/django_go/go_ajax/", http_input_module.put);
