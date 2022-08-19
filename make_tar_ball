@@ -1,0 +1,6 @@
+cp -r ../data c_mmw/data/
+cp ../c_mmw/server c_mmw/
+cd ..
+tar -czvf mmw.tar.gz ..
+ls
+
