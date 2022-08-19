@@ -1,4 +1,5 @@
 /node_modules
+/c_mmw
 nohup.out
 package-lock.json
 
