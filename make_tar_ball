@@ -1,6 +1,13 @@
-cp -r ../data c_mmw/data/
-cp ../c_mmw/server c_mmw/
+ls
+rm -rf c_mmw
+ls
+mkdir c_mmw
+mkdir c_mmw/data
+ls
 cd ..
-tar -czvf mmw.tar.gz ..
+cp c_mmw/server n_mmw/c_mmw/
+cp -r data/* n_mmw/c_mmw/data/
+ls
+tar -czvf mmw.tar.gz n_mmw
 ls
 
