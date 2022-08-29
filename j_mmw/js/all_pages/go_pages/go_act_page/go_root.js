@@ -9,6 +9,7 @@ function GoPlayRootObject() {
         this.phwangObject().initObject();
         this.phwangObject().getStorageLinkSessionData();
         this.phwangAjaxObject().startWatchDog(this.phwangLinkObject());
+        this.phwangAjaxObject().triggerGetMmwData(this.phwangLinkObject());
         this.theAjaxObject = new GoAjaxClass(this);
         this.theConfigStorageObject = new GoConfigStorageObject(this);
         this.theConfigObject = new GoPlayConfigObject(this);

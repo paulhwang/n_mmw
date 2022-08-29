@@ -51,6 +51,7 @@ function PhwangAjaxClass(phwang_object_val) {
         this.theSwitchTable = {
             "setup_link": this.setupLinkResponse,
             "get_link_data": this.getLinkDataResponse,
+            "get_mmw_data": this.getMmwDataResponse,
             "get_name_list": this.getNameListResponse,
             "setup_session": this.setupSessionResponse,
             "setup_session2": this.setupSession2Response,
@@ -144,6 +145,41 @@ function PhwangAjaxClass(phwang_object_val) {
                 if (data.length !== 0) {
                     this.abend("getLinkDataResponse", "length=" + data.length);
                 }
+            }
+        }
+    };
+    this.getMmwData = function(link_val) {
+        var output = JSON.stringify({
+                        command: this.phwangAjaxProtocolObject().GET_MMW_DATA_COMMAND(),
+                        packet_id: this.ajaxPacketId(),
+                        time_stamp: link_val.timeStamp(),
+                        link_id: link_val.linkId(),
+                        name_list_tag: link_val.nameListTag(),
+                        });
+        this.debug(true, "getMmwData", "output=" + output);
+        this.transmitAjaxRequest(output);
+    };
+    this.getMmwDataResponse = function(input_val) {
+        this.debug(true, "getMmwDataResponse", "input_val=" + input_val);
+        var data = JSON.parse(input_val);
+        if (data) {
+            if (data.mmw_data) {
+                var name_list_tag  = this.phwangObject().decodeNumber(data.mmw_data, 3);
+                this.phwangLinkObject().setNameListTag(name_list_tag);
+                var data1 = "[" + data.mmw_data + "]";
+                this.debug(true, "getMmwDataResponse", "data1=" + data1);
+                var array = JSON.parse(data1);
+                this.debug(true, "getMmwDataResponse", "array=" + array);
+
+/*
+                var name_list = data.c_name_list.slice(3);
+                this.debug(true, "getMmwDataResponse", "name_list_tag=" + name_list_tag);
+                this.debug(true, "getMmwDataResponse", "name_list=" + name_list);
+                var array = JSON.parse("[" + name_list + "]");
+                this.debug(true, "getMmwDataResponse", "array=" + array);
+                this.phwangLinkObject().setNameList(array);
+                this.phwangPortObject().receiveGetNameListResponse();
+                */
             }
         }
     };
@@ -294,6 +330,10 @@ function PhwangAjaxClass(phwang_object_val) {
         this.setPendingAjaxRequestCommand(output.command);
         this.phwangAjaxEngineObject().sendAjaxRequest(output_val);
     };
+    this.triggerGetMmwData = function(link_val) {
+        var ajax_object = link_val.phwangAjaxObject();
+        ajax_object.getMmwData(link_val);
+    };
     this.startWatchDog = function(link_val) {
         setInterval(function (link_val) {
             var ajax_object = link_val.phwangAjaxObject();
@@ -416,6 +456,7 @@ function PhwangAjaxProtocolClass() {
     this.SETUP_LINK_COMMAND = function() {return "setup_link";}
     this.CLEAR_LINK_COMMAND = function() {return "clear_link";}
     this.GET_LINK_DATA_COMMAND = function() {return "get_link_data";}
+    this.GET_MMW_DATA_COMMAND = function() {return "get_mmw_data";}
     this.GET_NAME_LIST_COMMAND = function() {return "get_name_list";}
     this.SETUP_SESSION_COMMAND = function() {return "setup_session";}
     this.CLEAR_SESSION_COMMAND = function() {return "clear_session";}

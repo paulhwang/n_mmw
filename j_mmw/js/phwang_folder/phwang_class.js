@@ -22,6 +22,14 @@ function PhwangClass(root_val) {
         }
         return output;
     };
+    this.decodeSignedNumber = function(input_val, size_val) {
+        if (input_val.charAt(0) !== '-') {
+            return this.decodeNumber(input_val, size_val);
+        }
+        else {
+            return this.decodeNumber(input_val.slice(1), size_val - 1) * -1;
+        }
+    };
     this.resetAllStorageData = function () {
         this.resetStorageLinkData();
         this.resetStorageSessionData();
