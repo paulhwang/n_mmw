@@ -26,9 +26,9 @@ function GoPlayDisplayObject(root_object_val) {
         context.fillStyle = "#FF8000";
         //context.fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
 
-        context.fillRect(0, 0, this.rootObject().htmlObject().canvasWidth(), this.rootObject().htmlObject().canvasWidth());
-        context.fillRect(this.rootObject().htmlObject().canvasWidth() + 30, 0, this.rootObject().htmlObject().canvasWidth(), this.rootObject().htmlObject().canvasWidth());
-        context.fillRect(this.rootObject().htmlObject().canvasWidth() * 2 + 60, 0, this.rootObject().htmlObject().canvasWidth(), this.rootObject().htmlObject().canvasWidth());
+        context.fillRect(0, 0, this.rootObject().htmlObject().coordWidth(), this.rootObject().htmlObject().coordWidth());
+        context.fillRect(this.rootObject().htmlObject().coordWidth() + 30, 0, this.rootObject().htmlObject().coordWidth(), this.rootObject().htmlObject().coordWidth());
+        context.fillRect(this.rootObject().htmlObject().coordWidth() * 2 + 60, 0, this.rootObject().htmlObject().coordWidth(), this.rootObject().htmlObject().coordWidth());
         this.drawMmw();
         //this.drawEmptyBoard();
         //this.drawStones();
@@ -42,9 +42,9 @@ function GoPlayDisplayObject(root_object_val) {
     this.drawMmw = function() {
         var grid_len = this.getGridLength();
         var context = this.canvasContext();
-        var size = 10;
-        var gape = 30;
-        var coord_size = 432;
+        var size = this.rootObject().htmlObject().coordSize();
+        var gap = this.rootObject().htmlObject().coordGap();
+        var coord_size = this.rootObject().htmlObject().coordWidth();
         var x_offset;
         var i = 1;
         while (i <= size) {
@@ -56,7 +56,7 @@ function GoPlayDisplayObject(root_object_val) {
             context.lineTo(x_offset + grid_len * i, grid_len * size);
             context.stroke();
 
-            x_offset = coord_size + gape;
+            x_offset = coord_size + gap;
             context.moveTo(x_offset, grid_len * i);
             context.lineTo(x_offset + grid_len * size, grid_len * i);
             context.stroke();
@@ -64,7 +64,7 @@ function GoPlayDisplayObject(root_object_val) {
             context.lineTo(x_offset + grid_len * i, grid_len * size);
             context.stroke();
 
-            x_offset = coord_size * 2 + gape * 2;
+            x_offset = coord_size * 2 + gap * 2;
             context.moveTo(x_offset, grid_len * i);
             context.lineTo(x_offset + grid_len * size, grid_len * i);
             context.stroke();
@@ -75,8 +75,8 @@ function GoPlayDisplayObject(root_object_val) {
             i += 1;
         }
         drawBoardDot(5, 5, 0);
-        drawBoardDot(5, 5, coord_size + gape);
-        drawBoardDot(5, 5, coord_size * 2 + gape * 2);
+        drawBoardDot(5, 5, coord_size + gap);
+        drawBoardDot(5, 5, coord_size * 2 + gap * 2);
 
         function drawBoardDot(x_val, y_val, x_offset_val) {
             context.beginPath();

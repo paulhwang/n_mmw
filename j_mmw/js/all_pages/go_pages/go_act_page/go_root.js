@@ -50,7 +50,9 @@ function GoPlayHtmlObject(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theCanvasWidth = 432;
+        this.theCoordWidth = 300;
+        this.theCoordSize = 10;
+        this.theCoordGap = 30;
         this.initElements();
         this.setupHtmlInput();
         this.debug(true, "init__", "");
@@ -62,8 +64,8 @@ function GoPlayHtmlObject(root_object_val) {
             return;
         }
         this.canvasElement().setAttribute("style", "border:1px solid #000000;");
-        this.canvasElement().width = this.canvasWidth() * 3 + 60;
-        this.canvasElement().height = this.canvasWidth() * 1.5;
+        this.canvasElement().width = this.coordWidth() * 3 + this.coordGap() * 2;
+        this.canvasElement().height = this.coordWidth() * 1.5;
         this.theCanvasContext = this.canvasElement().getContext("2d");
         if (this.canvasContext() === null) {
             this.abend("GoUiObject", "null canvasContext");
@@ -96,12 +98,14 @@ function GoPlayHtmlObject(root_object_val) {
     this.ajaxObject = function() {return this.rootObject().ajaxObject();};
     this.inputObject = function() {return this.rootObject().inputObject();};
     this.renderNameListFuncExist = function() {return false;};
-    this.canvasWidth = function() {return this.theCanvasWidth;};
+    this.coordWidth = function() {return this.theCoordWidth;};
+    this.coordSize = function() {return this.theCoordSize;};
+    this.coordGap = function() {return this.theCoordGap;}
     this.canvasElement = function() {return this.theCanvasElement;};
     this.canvasContext = function() {return this.theCanvasContext;};
     this.blackScoreElement = function() {return this.theBlackScoreElement;};
     this.whiteScoreElement = function() {return this.theWhiteScoreElement;};
-    this.getGridLength = function() {return this.canvasWidth() / 10;};
+    this.getGridLength = function() {return this.coordWidth() / 10;};
     //this.getGridLength = function() {return this.canvasElement().width / (this.configObject().boardSize() + 1);};
     this.getArrowUnitLength = function() {return this.canvasElement().width / 20;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
