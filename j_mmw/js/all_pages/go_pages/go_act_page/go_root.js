@@ -65,7 +65,7 @@ function GoPlayHtmlObject(root_object_val) {
         }
         this.canvasElement().setAttribute("style", "border:1px solid #000000;");
         this.canvasElement().width = this.coordWidth() * 3 + this.coordGap() * 2;
-        this.canvasElement().height = this.coordWidth() * 1.5;
+        this.canvasElement().height = this.coordWidth() * 1.05;
         this.theCanvasContext = this.canvasElement().getContext("2d");
         if (this.canvasContext() === null) {
             this.abend("GoUiObject", "null canvasContext");
