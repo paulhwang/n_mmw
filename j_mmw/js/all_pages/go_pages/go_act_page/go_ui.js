@@ -30,14 +30,6 @@ function GoPlayDisplayObject(root_object_val) {
         context.fillRect(this.rootObject().htmlObject().coordWidth() + 30, 0, this.rootObject().htmlObject().coordWidth(), this.rootObject().htmlObject().coordWidth());
         context.fillRect(this.rootObject().htmlObject().coordWidth() * 2 + 60, 0, this.rootObject().htmlObject().coordWidth(), this.rootObject().htmlObject().coordWidth());
         this.drawMmw();
-        //this.drawEmptyBoard();
-        //this.drawStones();
-        //if (this.gameObject().gameIsOver()) {
-        //    this.drawMarkedStones();
-            //////////////////this.drawLandMarks();
-        //}
-        //this.drawCandidateStone();
-        //this.drawScore();
     };
     this.drawMmw = function() {
         var grid_len = this.getGridLength();
@@ -46,7 +38,7 @@ function GoPlayDisplayObject(root_object_val) {
         var gap = this.rootObject().htmlObject().coordGap();
         var coord_size = this.rootObject().htmlObject().coordWidth();
         var x_offset;
-        var i = 1;
+        var i = 0;
         while (i <= size) {
             x_offset = 0;
             context.moveTo(x_offset, grid_len * i);
@@ -78,9 +70,48 @@ function GoPlayDisplayObject(root_object_val) {
         drawBoardDot(5, 5, coord_size + gap);
         drawBoardDot(5, 5, coord_size * 2 + gap * 2);
 
+        drawTarget(1200, 2500, 3700);
+
         function drawBoardDot(x_val, y_val, x_offset_val) {
             context.beginPath();
             context.arc(x_offset_val + x_val * grid_len, y_val * grid_len, 3, 0, 2 * Math.PI, false);
+            context.fillStyle = 'black';
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = '#003300';
+            context.stroke();
+        }
+        function drawTarget(x_val, y_val, z_val) {
+            x_val /= 1000;
+            y_val /= 1000;
+            z_val /= 1000;
+            x_val += size / 2;
+            y_val += size / 2;
+            z_val += size / 2;
+            var y_val0 = size - y_val;
+            var z_val0 = size - z_val;
+
+            var x_offset = 0;
+            context.beginPath();
+            context.arc(x_offset + x_val * grid_len, y_val0 * grid_len, 3, 0, 2 * Math.PI, false);
+            context.fillStyle = 'black';
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = '#003300';
+            context.stroke();
+
+            var x_offset = coord_size + gap;
+            context.beginPath();
+            context.arc(x_offset + x_val * grid_len, z_val0 * grid_len, 3, 0, 2 * Math.PI, false);
+            context.fillStyle = 'black';
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = '#003300';
+            context.stroke();
+
+            var x_offset = coord_size * 2 + gap * 2;
+            context.beginPath();
+            context.arc(x_offset + y_val * grid_len, z_val0 * grid_len, 3, 0, 2 * Math.PI, false);
             context.fillStyle = 'black';
             context.fill();
             context.lineWidth = 1;
