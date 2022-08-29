@@ -7,15 +7,25 @@ function GoPlayDisplayObject(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+
         this.theTargetArrayX = [];
-        this.theTargetArrayX.push(1000);
-        this.theTargetArrayX.push(1200);
-        this.theTargetArrayX.push(1400);
-        this.theTargetArrayX.push(1600);
-        this.theTargetArrayX.push(1800);
+        this.theTargetArrayY = [];
+        this.theTargetArrayZ = [];
+        this.pushTarget(1000, 2500, 3700);
+        this.pushTarget(1200, 2500, 3700);
+        this.pushTarget(1400, 2500, 3700);
+        this.pushTarget(1600, 2500, 3700);
+        this.pushTarget(1800, 2500, 3700);
+        this.pushTarget(2000, 2500, 3700);
+
         this.drawArrows();
         this.drawBoard();
         this.debug(true, "init__", "");
+    };
+    this.pushTarget = function(x_val, y_val, z_val) {
+        this.targetArrayX().push(x_val);
+        this.targetArrayY().push(y_val);
+        this.targetArrayZ().push(z_val);
     };
     this.drawBoard = function() {
         var arrow_color = "black";
@@ -76,9 +86,11 @@ function GoPlayDisplayObject(root_object_val) {
         drawBoardDot(5, 5, coord_size + gap);
         drawBoardDot(5, 5, coord_size * 2 + gap * 2);
 
-        var target_array_x = this.theTargetArrayX;
-        for (i = 0; i < 5; i++) {
-            drawTarget(target_array_x[i], 2500, 3700);
+        var target_array_x = this.targetArrayX();
+        var target_array_y = this.targetArrayY();
+        var target_array_z = this.targetArrayZ();
+        for (i = 0; i < target_array_x.length; i++) {
+            drawTarget(target_array_x[i], target_array_y[i], target_array_z[i]);
         }
 
         function drawBoardDot(x_val, y_val, x_offset_val) {
@@ -336,6 +348,9 @@ function GoPlayDisplayObject(root_object_val) {
     this.inputObject = function() {return this.rootObject().inputObject();};
     this.boardObject = function() {return this.rootObject().boardObject();};
     this.gameObject = function() {return this.rootObject().gameObject();};
+    this.targetArrayX = function() {return this.theTargetArrayX;};
+    this.targetArrayY = function() {return this.theTargetArrayY;};
+    this.targetArrayZ = function() {return this.theTargetArrayZ;};
     this.debug = function(debug_val, str1_val, str2_val) {if (debug_val) {this.logit(str1_val, str2_val);}};
     this.logit = function(str1_val, str2_val) {this.rootObject().logit_(this.objectName() + "." + str1_val, str2_val);};
     this.abend = function(str1_val, str2_val) {this.rootObject().abend_(this.objectName() + "." + str1_val, str2_val);};
