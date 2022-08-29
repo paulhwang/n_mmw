@@ -49,7 +49,7 @@ function ConfigHtmlObject(root_object_val) {
             this0.configObject().setHandicapPoint($(".config_section .go_config_section .handicap").val());
             var encoded_config = this0.configObject().encodeConfig(this0.phwangLinkObject().myName());
             this0.debug(true, "setupHtmlInput", "boardSize=" + this0.configObject().boardSize() + " myColor=" + this0.configObject().myColor() + " komi=" + this0.configObject().komiPoint() + " handicap=" + this0.configObject().handicapPoint() + " myName-" + this0.phwangLinkObject().myName() + " hisName=" + this0.configObject().hisName() + " config=" + encoded_config);
-            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configObject().hisName(), encoded_config);
+            this0.phwangAjaxObject().setupSession(this0.phwangLinkObject(), this0.configObject().hisName(), "MMW");
         });
     };
     this.renderNameList = function() {
@@ -75,7 +75,7 @@ function ConfigAjaxClass(root_object_val) {
     this.init__ = function (root_object_val) {this.theRootObject = root_object_val;};
     this.receiveSetupLinkResponse = function(result_val) {};
     this.receiveGetNameListResponse = function(result_val) {this.htmlObject().renderNameList();};
-    this.receiveSetupSessionResponse = function(result_val) {/*this.htmlObject().gotoNextPage();*/};
+    this.receiveSetupSessionResponse = function(result_val) {this.htmlObject().gotoNextPage();};
     this.receiveSetupSession2Response = function(result_val) {
         this.phwangObject().sleepMilliseconds(10000);//for the opponents in the same browser
         this.phwangObject().putStorageLinkSessionData();

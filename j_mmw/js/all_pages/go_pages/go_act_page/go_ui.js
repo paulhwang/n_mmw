@@ -24,15 +24,69 @@ function GoPlayDisplayObject(root_object_val) {
         context.strokeStyle = '#003300';
         this.drawArrows();
         context.fillStyle = "#FF8000";
-        context.fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
-        this.drawEmptyBoard();
-        this.drawStones();
-        if (this.gameObject().gameIsOver()) {
-            this.drawMarkedStones();
+        //context.fillRect(0, 0, this.canvasElement().width, this.canvasElement().width);
+
+        context.fillRect(0, 0, this.rootObject().htmlObject().canvasWidth(), this.rootObject().htmlObject().canvasWidth());
+        context.fillRect(this.rootObject().htmlObject().canvasWidth() + 30, 0, this.rootObject().htmlObject().canvasWidth(), this.rootObject().htmlObject().canvasWidth());
+        context.fillRect(this.rootObject().htmlObject().canvasWidth() * 2 + 60, 0, this.rootObject().htmlObject().canvasWidth(), this.rootObject().htmlObject().canvasWidth());
+        this.drawMmw();
+        //this.drawEmptyBoard();
+        //this.drawStones();
+        //if (this.gameObject().gameIsOver()) {
+        //    this.drawMarkedStones();
             //////////////////this.drawLandMarks();
+        //}
+        //this.drawCandidateStone();
+        //this.drawScore();
+    };
+    this.drawMmw = function() {
+        var grid_len = this.getGridLength();
+        var context = this.canvasContext();
+        var size = 10;
+        var gape = 30;
+        var coord_size = 432;
+        var x_offset;
+        var i = 1;
+        while (i <= size) {
+            x_offset = 0;
+            context.moveTo(x_offset, grid_len * i);
+            context.lineTo(x_offset + grid_len * size, grid_len * i);
+            context.stroke();
+            context.moveTo(x_offset + grid_len * i, 0);
+            context.lineTo(x_offset + grid_len * i, grid_len * size);
+            context.stroke();
+
+            x_offset = coord_size + gape;
+            context.moveTo(x_offset, grid_len * i);
+            context.lineTo(x_offset + grid_len * size, grid_len * i);
+            context.stroke();
+            context.moveTo(x_offset + grid_len * i, 0);
+            context.lineTo(x_offset + grid_len * i, grid_len * size);
+            context.stroke();
+
+            x_offset = coord_size * 2 + gape * 2;
+            context.moveTo(x_offset, grid_len * i);
+            context.lineTo(x_offset + grid_len * size, grid_len * i);
+            context.stroke();
+            context.moveTo(x_offset + grid_len * i, 0);
+            context.lineTo(x_offset + grid_len * i, grid_len * size);
+            context.stroke();
+
+            i += 1;
         }
-        this.drawCandidateStone();
-        this.drawScore();
+        drawBoardDot(5, 5, 0);
+        drawBoardDot(5, 5, coord_size + gape);
+        drawBoardDot(5, 5, coord_size * 2 + gape * 2);
+
+        function drawBoardDot(x_val, y_val, x_offset_val) {
+            context.beginPath();
+            context.arc(x_offset_val + x_val * grid_len, y_val * grid_len, 3, 0, 2 * Math.PI, false);
+            context.fillStyle = 'black';
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = '#003300';
+            context.stroke();
+        }
     };
     this.drawEmptyBoard = function() {
         var grid_len = this.getGridLength();
@@ -49,6 +103,7 @@ function GoPlayDisplayObject(root_object_val) {
             context.stroke();
             i += 1;
         }
+        /*
         if (this.boardSize() === 9) {
             drawBoardDot(5, 5);
         } else if (this.boardSize() === 13) {
@@ -68,6 +123,7 @@ function GoPlayDisplayObject(root_object_val) {
             drawBoardDot(16, 10);
             drawBoardDot(16, 16);
         }
+        */
         function drawBoardDot(x_val, y_val) {
             context.beginPath();
             context.arc(x_val * grid_len, y_val * grid_len, 3, 0, 2 * Math.PI, false);
