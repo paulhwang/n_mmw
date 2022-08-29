@@ -7,9 +7,15 @@ function GoPlayDisplayObject(root_object_val) {
     "use strict";
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theTargetArrayX = [];
+        this.theTargetArrayX.push(1000);
+        this.theTargetArrayX.push(1200);
+        this.theTargetArrayX.push(1400);
+        this.theTargetArrayX.push(1600);
+        this.theTargetArrayX.push(1800);
         this.drawArrows();
         this.drawBoard();
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
     this.drawBoard = function() {
         var arrow_color = "black";
@@ -70,7 +76,10 @@ function GoPlayDisplayObject(root_object_val) {
         drawBoardDot(5, 5, coord_size + gap);
         drawBoardDot(5, 5, coord_size * 2 + gap * 2);
 
-        drawTarget(1200, 2500, 3700);
+        var target_array_x = this.theTargetArrayX;
+        for (i = 0; i < 5; i++) {
+            drawTarget(target_array_x[i], 2500, 3700);
+        }
 
         function drawBoardDot(x_val, y_val, x_offset_val) {
             context.beginPath();
