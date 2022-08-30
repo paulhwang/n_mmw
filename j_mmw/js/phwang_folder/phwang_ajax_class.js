@@ -166,10 +166,6 @@ function PhwangAjaxClass(phwang_object_val) {
             if (data.mmw_data) {
                 var name_list_tag  = this.phwangObject().decodeNumber(data.mmw_data, 3);
                 this.phwangLinkObject().setNameListTag(name_list_tag);
-                var data1 = "[" + data.mmw_data + "]";
-                this.debug(true, "getMmwDataResponse", "data1=" + data1);
-                var array = JSON.parse(data1);
-                this.debug(true, "getMmwDataResponse", "array=" + array);
 
 /*
                 var name_list = data.c_name_list.slice(3);
