@@ -188,6 +188,8 @@ function PhwangAjaxClass(phwang_object_val) {
                 var z_number = this.phwangObject().decodeSignedNumber(z_str, Number(len) - 2);
                 this.debug(true, "getMmwDataResponse", "z_number=" + z_number);
 
+                this.rootObject().displayObject().pushTarget(x_number, y_number, z_number);
+                this.rootObject().displayObject().drawBoard();
 
                 //var name_list_tag  = this.phwangObject().decodeNumber(data.mmw_data, 3);
                 //this.phwangLinkObject().setNameListTag(name_list_tag);
