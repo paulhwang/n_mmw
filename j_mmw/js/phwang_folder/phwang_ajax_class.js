@@ -191,6 +191,8 @@ function PhwangAjaxClass(phwang_object_val) {
                 this.rootObject().displayObject().pushTarget(x_number, y_number, z_number);
                 this.rootObject().displayObject().drawBoard();
 
+                this.triggerGetMmwData(this.phwangLinkObject());
+
                 //var name_list_tag  = this.phwangObject().decodeNumber(data.mmw_data, 3);
                 //this.phwangLinkObject().setNameListTag(name_list_tag);
 

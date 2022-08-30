@@ -11,12 +11,6 @@ function GoPlayDisplayObject(root_object_val) {
         this.theTargetArrayX = [];
         this.theTargetArrayY = [];
         this.theTargetArrayZ = [];
-        this.pushTarget(1000, -2500, 3700);
-        this.pushTarget(1200, -2500, 3700);
-        this.pushTarget(1400, -2500, 3700);
-        this.pushTarget(1600, -2500, 3700);
-        this.pushTarget(1800, -2500, 3700);
-        this.pushTarget(2000, -2500, 3700);
 
         //this.drawArrows();
         this.drawBoard();
@@ -93,7 +87,7 @@ function GoPlayDisplayObject(root_object_val) {
         var target_array_x = this.targetArrayX();
         var target_array_y = this.targetArrayY();
         var target_array_z = this.targetArrayZ();
-        for (i = 0; i < target_array_x.length; i++) {
+        for (i = target_array_x.length - 1; i < target_array_x.length; i++) {
             drawTarget(target_array_x[i], target_array_y[i], target_array_z[i]);
         }
 
@@ -118,7 +112,7 @@ function GoPlayDisplayObject(root_object_val) {
 
             var x_offset = 0;
             context.beginPath();
-            context.arc(x_offset + x_val * grid_len, y_val0 * grid_len, 3, 0, 2 * Math.PI, false);
+            context.arc(x_offset + x_val * grid_len, y_val0 * grid_len, 5, 0, 2 * Math.PI, false);
             context.fillStyle = 'black';
             context.fill();
             context.lineWidth = 1;
@@ -127,7 +121,7 @@ function GoPlayDisplayObject(root_object_val) {
 
             var x_offset = coord_size + gap;
             context.beginPath();
-            context.arc(x_offset + x_val * grid_len, z_val0 * grid_len, 3, 0, 2 * Math.PI, false);
+            context.arc(x_offset + x_val * grid_len, z_val0 * grid_len, 5, 0, 2 * Math.PI, false);
             context.fillStyle = 'black';
             context.fill();
             context.lineWidth = 1;
@@ -136,7 +130,7 @@ function GoPlayDisplayObject(root_object_val) {
 
             var x_offset = coord_size * 2 + gap * 2;
             context.beginPath();
-            context.arc(x_offset + y_val * grid_len, z_val0 * grid_len, 3, 0, 2 * Math.PI, false);
+            context.arc(x_offset + y_val * grid_len, z_val0 * grid_len, 5, 0, 2 * Math.PI, false);
             context.fillStyle = 'black';
             context.fill();
             context.lineWidth = 1;
